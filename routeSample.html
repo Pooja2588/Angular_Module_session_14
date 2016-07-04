@@ -1,0 +1,102 @@
+<html>
+   
+   <head>
+      <title>Angular JS Filters</title>
+      <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+       <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+         <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+       
+   </head>
+   
+   <body>
+      
+      <div ng-app = "mainApp" >
+          <div class="container">
+		<div class="row">
+            <h1>My Shipment</h1>
+		<div class="col-md-3">
+		   <ul class="nav">
+               <li><a href="#/"> Home </a></li>
+			<li><a href="#Register"> Register Shipment </a></li>
+			<li><a href="#Status"> Get status </a></li>
+               	<li><a href="#Track"> Track Shipment </a></li>
+                 	<li><a href="#Contact"> Contact us </a></li>
+			</ul>
+		</div>
+            <hr/>
+		<div class="col-md-9">
+		  	<div ng-view></div>
+            	
+		</div>
+             <script type = "text/ng-template" id = "Contact.htm">
+            <h2>{{message}} </h2>
+           
+         </script>
+         
+         <script type = "text/ng-template" id = "Status.htm">
+            <h2> Enter Order Id: </h2><br>
+           <input type="text" ng-model="order"/>
+             <br>
+             <button type="button" ng-click="showmsg=true">Go</button>
+             <h1 ng-show="showmsg">Your {{order}} is in process</h1>
+         </script>
+            
+            <script type = "text/ng-template" id = "Track.htm">
+            <h2> Enter Order Id: </h2><br>
+           <input type="text" ng-model="order"/>
+             <br>
+             <button type="button" ng-click="showmsg=true">Go</button>
+             <h1 ng-show="showmsg">Your {{order}} has been shipped.</h1>
+         </script>
+		</div>
+    </div>
+            </div>
+      <script>
+         var mainApp = angular.module("mainApp", ['ngRoute']);
+         mainApp.config(['$routeProvider', function($routeProvider) {
+            $routeProvider.
+            
+            when('/Register', {
+               templateUrl: 'Register.html',
+               controller: 'myctrl'
+            }).
+            
+            when('/Status', {
+               templateUrl: 'Status.htm',
+               controller: 'myctrl'
+            }).
+            when('/Track', {
+               templateUrl: 'Track.htm',
+               controller: 'myctrl'
+            }).
+            when('/Contact', {
+               templateUrl: 'Contact.htm',
+               controller: 'detail'
+            }).
+                        
+
+            
+            otherwise({
+               redirectTo: '/Register'
+            });
+         }]);
+         
+         mainApp.controller('myctrl', function($scope) {
+            $scope.message = "This page will be used to display add student form";
+             $scope.order="";
+             $scope.origin="";
+               
+             $scope.register="Shipment registered!!";
+            
+         });
+         
+         mainApp.controller('detail', function($scope) {
+            $scope.message = "Our contact details are : +91-88888888";
+         });
+			
+      </script>
+          
+     
+      
+   </body>
+</html>

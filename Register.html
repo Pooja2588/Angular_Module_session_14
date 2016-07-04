@@ -1,0 +1,8 @@
+<div >
+<h3>Your order :</h3> <input type="text" ng-model="order"/><br>
+    <h3>Origin :</h3> <input type="text" ng-model="origin"/><br>
+    <button type="button" ng-click="showmsg=true;order='';origin=''">Register</button>
+    <br>
+  
+    <h3 ng-show="showmsg">{{register}}</h3>
+</div>
